@@ -1,0 +1,21 @@
+<div class="board" style="background-image: url('/img/title_img_1.png');padding: 130px;"><%= link_to '자유게시판', '/posts/list', class: "info" %></div>
+<div class="container" style="margin-top:30px; margin-bottom: 100px;">
+<% @allpost.each do |p| %>
+    <table border="0">
+            <tr>
+                <td width="100px;"><div class="board_num"><%= p.id %></div></td>
+                <td width="80%"> <a href="/posts/show/<%= p.id %>"><%= p.title %></a><br/><br/>
+             </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <p><i class="fa fa-user-o" aria-hidden="true"></i> <%= p.user.email%></p>
+                    <p><i class="fa fa-clock-o" aria-hidden="true"></i> <%= p.created_at.in_time_zone("Asia/Seoul").strftime('%Y-%m-%d %H:%M:%S') %></p>
+                </td>
+            </tr>
+      </table>
+    <hr/>
+<% end %>
+<div align="center"><%= will_paginate @allpost, :previous_label => '이전', :next_label => '다음' %></div>
+<div align="right"><%= link_to '글 쓰기', "/posts/new", class: "btn btn-primary" %></div>
+</div>

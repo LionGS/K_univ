@@ -1,0 +1,18 @@
+<!-- Main wide banner -->
+  <img width="100%" src="/img/main.png" title="">
+<!-- Main wide banner -->
+<div id="main_board">
+    <div class="container">
+        <br/>
+    <% @allpost.each do |p| %>
+        <table border="0">
+            <tr>
+                <td width="100px;"><div class="board_num"><%= p.id %></div></td>
+                <td width="80%"><a href="/posts/show/<%= p.id %>"><%= p.title %></a></td>
+                <td><%= p.created_at.in_time_zone("Asia/Seoul").strftime('%Y-%m-%d %H:%M:%S') %></td>
+            </tr>
+        </table>
+       <hr/>
+       <% end %>
+    </div>
+</div>

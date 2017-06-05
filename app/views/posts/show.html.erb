@@ -1,0 +1,25 @@
+<div class="board" style="background-image: url('/img/title_img_1.png');padding: 130px;"><%= link_to '자유게시판', '/posts/list', class: "info" %></div>
+    <div class="container" style="margin-top:30px; margin-bottom: 100px;">
+    <h2><%= @findpost.title %></h2><br/>
+    <i class="fa fa-user-o" aria-hidden="true"></i> <%= @findpost.user.email %>
+    <div style="float: right; font-size: 17px">
+    
+<% # 좋아요 기능 로그인 여부에 따라 다른 좋아요 버튼, 좋아요 갯수는 likes.size 메서드로 출력 %> 
+
+    <% if current_user.is_like?(@findpost) %>
+    이 글을 <%= current_user.email %>님을 포함한 <%= @findpost.likes.size %> 명이 좋아합니다.
+    <%= link_to "좋아요 취소", post_like_path(@findpost), class: "btn btn-danger"%>
+    <% else %>
+    이 글을 <%= @findpost.likes.size %> 명이 좋아합니다.
+    <%= link_to "좋아요", post_like_path(@findpost), class: "btn btn-info"%>
+    <% end %>
+    </div>
+    
+    <hr/>
+    <p align="right"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= @findpost.created_at.in_time_zone("Asia/Seoul").strftime('%Y-%m-%d %H:%M:%S') %></p>
+    <%= @findpost.content.html_safe %><br/><br/>
+    <%= link_to '목록', "/posts/list", class: "btn btn-info" %>
+    <%= link_to '수정', "/posts/edit/#{@findpost.id}", class: "btn btn-warning" %>
+    <%= link_to '삭제', "/posts/delete/#{@findpost.id}/", class: "btn btn-danger", data: { confirm: '정말로 삭제하시겠습니까?' } %>
+    <div align="right"><%= link_to '글 쓰기', "/posts/new", class: "btn btn-primary" %></div>
+</div>
